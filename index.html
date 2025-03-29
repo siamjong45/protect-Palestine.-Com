@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protect Palestine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .search-box {
+            margin: 20px;
+        }
+        .product {
+            display: none;
+            padding: 20px;
+            border: 2px solid red;
+            margin: 10px;
+            background-color: white;
+        }
+        .boycott {
+            color: red;
+            font-weight: bold;
+        }
+        .approved {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Protect Palestine</h1>
+    <input type="text" id="search" class="search-box" placeholder="পণ্য অনুসন্ধান করুন...">
+    <button onclick="searchProduct()">অনুসন্ধান</button>
+    <div id="result"></div>
+    
+    <script>
+        const products = {
+            "Coca-Cola": "boycott",
+            "Pepsi": "boycott",
+            "Sprite": "boycott",
+            "Fanta": "boycott",
+            "7UP": "boycott",
+            "Mirinda": "boycott",
+            "Mountain Dew": "boycott",
+            "Tang": "boycott",
+            "Milo": "boycott",
+            "Maggi": "boycott",
+            "McDonald's": "boycott",
+            "Starbucks": "boycott",
+            "KFC": "boycott",
+            "Nike": "boycott",
+            "Adidas": "boycott",
+            "Puma": "boycott",
+            "Bata": "boycott",
+            "Reebok": "boycott"
+        };
+
+        function searchProduct() {
+            const query = document.getElementById("search").value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (products[query]) {
+                resultDiv.innerHTML = `<div class='product'><h2>${query}</h2><p class='boycott'>বয়কট করুন!</p></div>`;
+            } else {
+                resultDiv.innerHTML = `<div class='product' style='border-color:green;'><h2>${query}</h2><p class='approved'>ব্যবহারযোগ্য</p></div>`;
+            }
+        }
+    </script>
+</body>
+</html>
