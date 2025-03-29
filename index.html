@@ -1,74 +1,94 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protect Palestine</title>
+    <title>বয়কট প্রোডাক্ট লিস্ট</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
         }
-        .search-box {
-            margin: 20px;
+        header {
+            background-color: #ff4d4d;
+            padding: 20px;
+            color: white;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        #product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .product {
-            display: none;
-            padding: 20px;
-            border: 2px solid red;
+            border: 1px solid #ccc;
+            padding: 10px;
             margin: 10px;
             background-color: white;
         }
-        .boycott {
-            color: red;
-            font-weight: bold;
+        #search-result {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin: 20px;
         }
-        .approved {
-            color: green;
-            font-weight: bold;
+        footer {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Protect Palestine</h1>
-    <input type="text" id="search" class="search-box" placeholder="পণ্য অনুসন্ধান করুন...">
-    <button onclick="searchProduct()">অনুসন্ধান</button>
-    <div id="result"></div>
-    
-    <script>
-        const products = {
-            "Coca-Cola": "boycott",
-            "Pepsi": "boycott",
-            "Sprite": "boycott",
-            "Fanta": "boycott",
-            "7UP": "boycott",
-            "Mirinda": "boycott",
-            "Mountain Dew": "boycott",
-            "Tang": "boycott",
-            "Milo": "boycott",
-            "Maggi": "boycott",
-            "McDonald's": "boycott",
-            "Starbucks": "boycott",
-            "KFC": "boycott",
-            "Nike": "boycott",
-            "Adidas": "boycott",
-            "Puma": "boycott",
-            "Bata": "boycott",
-            "Reebok": "boycott"
-        };
+    <header>
+        <h1>বয়কট পণ্য তালিকা</h1>
+        <input type="text" id="search" placeholder="পণ্যের নাম লিখুন">
+        <button onclick="searchProduct()">সার্চ</button>
+        <a href="https://forms.google.com" target="_blank" class="add-product">+ এড প্রোডাক্ট</a>
+    </header><section id="product-list">
+    <!-- পণ্যগুলোর তালিকা এখানে দেখানো হবে -->
+</section>
 
-        function searchProduct() {
-            const query = document.getElementById("search").value;
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "";
+<section id="search-result">
+    <h2>সার্চ ফলাফল</h2>
+    <p id="result-text"></p>
+    <button onclick="goBack()">ফিরে যান</button>
+</section>
 
-            if (products[query]) {
-                resultDiv.innerHTML = `<div class='product'><h2>${query}</h2><p class='boycott'>বয়কট করুন!</p></div>`;
-            } else {
-                resultDiv.innerHTML = `<div class='product' style='border-color:green;'><h2>${query}</h2><p class='approved'>ব্যবহারযোগ্য</p></div>`;
-            }
+<footer>
+    <button onclick="showHome()">হোম</button>
+    <button onclick="showAbout()">অ্যাবাউট</button>
+    <button onclick="showList()">বয়কট লিস্ট</button>
+</footer>
+
+<script>
+    const boycottProducts = [
+        "Sunsilk", "Dove", "TRESemmé", "Clear", "Clinic Plus", "Pond's", "Pond's Men", "Lux", "Vaseline", "Glow & Lovely", "Glow & Handsome",
+        "Pepsodent", "Close Up", "Lifebuoy", "Rin", "Surf Excel", "Wheel", "Vim", "Domex", "Knorr"
+    ];
+
+    function searchProduct() {
+        let query = document.getElementById("search").value.trim().toLowerCase();
+        let resultText = "";
+        if (boycottProducts.some(p => p.toLowerCase() === query)) {
+            resultText = `<span style='color: red;'>এই পণ্যটি বয়কট লিস্টে আছে</span>`;
+        } else {
+            resultText = `<span style='color: green;'>এই পণ্যটি বয়কট লিস্টে নেই</span>`;
         }
-    </script>
+        document.getElementById("result-text").innerHTML = resultText;
+        document.getElementById("product-list").style.display = "none";
+        document.getElementById("search-result").style.display = "block";
+    }
+
+    function goBack() {
+        document.getElementById("search-result").style.display = "none";
+        document.getElementById("product-list").style.display = "block";
+    }
+</script>
+
 </body>
 </html>
